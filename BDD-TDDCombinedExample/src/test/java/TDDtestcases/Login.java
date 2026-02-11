@@ -1,6 +1,6 @@
 package TDDtestcases;
 
-import org.junit.jupiter.api.Assertions;
+import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,7 +22,7 @@ public class Login {
 	   lp.enterUserName("UserName");
 	   lp.enterPassword("Password");
 	   HomePage hp = lp.submit();
-	   Assertions.assertNotNull(hp);
+	   assertNotNull(hp);
 	}
 	
 	@AfterEach

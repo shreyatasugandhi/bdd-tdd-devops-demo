@@ -22,6 +22,7 @@ public class BDDLoginTest {
     public void initiateBrowser(String browser) {
 
         ChromeOptions options = new ChromeOptions();
+        
         options.addArguments("--remote-allow-origins=*");
 
         // Accept SSL certificates automatically
