@@ -1,0 +1,32 @@
+install git --> convert master to main while installing (optional)
+git init
+git config user.name "shreyatasugandhi"
+git config user.password ""
+
+
+--> genrate ssh-keygen -> .pub and simple
+--> copy .pub key and past into github account
+--> give ssh in cloning
+--> 
+
+
+
+Clone>>
+Git status>> 
+create file >> 
+git status >> 
+git add . >> 
+git status >> 
+git commit -m "message" >> 
+git log --oneline >> 
+show the commit log >> 
+edit the file>> 
+git status >> 
+git add . >> 
+git status >> 
+git commit -m "msg" >>
+git status >> 
+git log --oneline >> 
+git fetch >>
+git pull >> 
+git push >>
