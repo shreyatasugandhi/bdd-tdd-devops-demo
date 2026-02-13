@@ -1,0 +1,66 @@
+pipeline {
+    agent any
+
+    tools {
+        maven 'Maven'
+        jdk 'JDK'
+    }
+
+    stages {
+
+        stage('Checkout Code') {
+            steps {
+                checkout([
+                    $class: 'GitSCM',
+                    branches: [[name: '*/main']],
+                    userRemoteConfigs: [[
+                        url: 'https://github.com/shreyatasugandhi/bdd-tdd-devops-demo.git'
+                    ]]
+                ])
+            }
+        }
+
+        stage('Clean') {
+            steps {
+                dir('BDD-TDDCombinedExample') {
+                    bat 'mvn clean'
+                }
+            }
+        }
+
+        stage('TDD - Unit Tests') {
+            steps {
+                dir('BDD-TDDCombinedExample') {
+                    bat 'mvn test -Dtest=TDDtestcases.LoginServiceTest'
+                }
+            }
+        }
+
+        stage('BDD - Cucumber Tests') {
+            steps {
+                dir('BDD-TDDCombinedExample') {
+                    bat 'mvn test -Dtest=BDDtestcases.RunTest'
+                }
+            }
+        }
+    }
+
+    post {
+
+        always {
+            echo 'Publishing Reports...'
+
+            junit 'BDD-TDDCombinedExample/target/surefire-reports/*.xml'
+
+            archiveArtifacts artifacts: 'BDD-TDDCombinedExample/target/site/jacoco/**', fingerprint: true
+        }
+
+        success {
+            echo 'Pipeline Successful - TDD + BDD executed'
+        }
+
+        failure {
+            echo 'Pipeline Failed - Check Reports'
+        }
+    }
+}
